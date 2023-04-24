@@ -1,13 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
+import {Card, TextInput} from "react-native-paper";
+import {useState} from "react";
 
 export default function App() {
+  const [val, setVal] = useState('');
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <KeyboardAvoidingView >
+        <Card style={styles.card}>
+          <Card.Content>
+            <TextInput value={val} onChangeText={onChange}
+                       // secureTextEntry={true}
+                       autoComplete={'password'}
+                       textContentType={'password'}
+                       returnKeyType={'done'}/>
+          </Card.Content>
+        </Card>
+      </KeyboardAvoidingView>
     </View>
   );
+
+  function onChange(text) {
+    setVal(text);
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  card: {
+    width: '100%'
+  }
 });
